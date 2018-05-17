@@ -2,7 +2,7 @@
 
 A status bar texture package for pfUI, providing additional textures for the unit frames, as well as additional fonts.
 
-**Note: Can't be used along with [pfUI-fonts](https://github.com/shagu/pfUI-fonts)!
+**Note: Can't be used along with [pfUI-fonts](https://github.com/shagu/pfUI-fonts)!**
 
 ## Installation
 1. Download
