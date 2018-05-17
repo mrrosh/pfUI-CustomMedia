@@ -13,5 +13,5 @@ A status bar texture package for [pfUI](https://github.com/shagu/pfUI), providin
 
 ## Preview
 
-![Preview](https://i.imgur.com/ZFrFmY1.png)
+![Preview](https://i.imgur.com/8CUtD82.png)
 
