@@ -1,0 +1,9 @@
+## Interface: 11200
+## Title: |cff33ffccpf|cffffffffUI|cffaaaaaa |cff33ffccC|cffffffffustom|cffaaaaaa |cff33ffccM|cffffffffedia|cffaaaaaa v1.1
+## Author: mr_rosh
+## Notes: Status Bar Texture Package and Additional Fonts for pfUI
+## Version: 1.1
+## Dependencies: pfUI
+
+# main
+pfUI-CustomMedia.lua
