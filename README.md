@@ -5,13 +5,15 @@ A status bar texture package for [pfUI](https://github.com/shagu/pfUI), providin
 **Note: Can't be used along with [pfUI-fonts](https://github.com/shagu/pfUI-fonts)!**
 
 ## Installation
-1. Download
-2. Unpack the Zip file
-3. Rename the folder "pfUI-CustomMedia-master" to "pfUI-CustomMedia"
-4. Copy "pfUI-CustomMedia" into Wow-Directory\Interface\AddOns
-5. Restart Wow
+1. Download.
+2. Unpack the Zip file.
+3. Select the desired version of pfUI-CustomMedia.
+4. Copy the selected folder into Wow-Directory\Interface\AddOns.
+5. Restart your World of Warcraft client.
 
 ## Preview
 
-![Preview](https://i.imgur.com/8CUtD82.png)
+![v1.0](https://i.imgur.com/0msH8WA.png)
+![v1.1](https://i.imgur.com/4bYK8EL.png)
+![v1.2](https://i.imgur.com/Y4k3yz9.png)
 
