@@ -1,19 +1,19 @@
 # pfUI-CustomMedia
 
-A status bar texture package for [pfUI](https://github.com/shagu/pfUI), providing additional textures for the unit frames, as well as additional fonts.
-
-**Note: Can't be used along with [pfUI-fonts](https://github.com/shagu/pfUI-fonts)!**
+A status bar texture package for [pfUI](https://github.com/shagu/pfUI), providing additional textures for the unit frames and casting bars.
 
 ## Installation
 1. Download.
 2. Unpack the Zip file.
-3. Select the desired version of pfUI-CustomMedia.
-4. Copy the selected folder into Wow-Directory\Interface\AddOns.
+3. Place the folder into Wow-Directory\Interface\AddOns.
+4. Rename it to **pfUI-CustomMedia**.
 5. Restart your World of Warcraft client.
 
 ## Preview
 
-![v1.0](https://i.imgur.com/0msH8WA.png)
-![v1.1](https://i.imgur.com/4bYK8EL.png)
-![v1.2](https://i.imgur.com/Y4k3yz9.png)
+![pfUI-CustomMedia](https://i.imgur.com/Og1aHck.jpg)
+![preview](https://i.imgur.com/nhNfA9x.jpg)
+![options](https://i.imgur.com/urCptQu.png)
+
+## Thanks to [dein0s](https://gitlab.com/dein0s_wow_vanilla) for writing up the casting bar texture code.
 
