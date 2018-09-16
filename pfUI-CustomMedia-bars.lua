@@ -1,6 +1,3 @@
-
---- Custom Unitframe Status bar Textures ---
-
 table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-A.tga:pfUI-A")
 table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-B.tga:pfUI-B")
 table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-C.tga:pfUI-C")
@@ -17,3 +14,12 @@ table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMe
 table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-N.tga:pfUI-N")
 table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-O.tga:pfUI-O")
 table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-P.tga:pfUI-P")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-Q.tga:pfUI-Q")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-R.tga:pfUI-R")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-S.tga:pfUI-S")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-T.tga:pfUI-T")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-U.tga:pfUI-U")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-V.tga:pfUI-V")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-W.tga:pfUI-W")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-X.tga:pfUI-X")
+table.insert(pfUI.gui.dropdowns.uf_bartexture, "Interface\\AddOns\\pfUI-CustomMedia\\bars\\pfUI-Y.tga:pfUI-Y")
