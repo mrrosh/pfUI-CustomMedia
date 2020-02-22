@@ -1,0 +1,9 @@
+## Interface: 20400
+## Title: |cff33ffccpf|cffffffffUI|cffaaaaaa |cff33ffccC|cffffffffustom|cffaaaaaa |cff33ffccM|cffffffffedia|cffaaaaaa
+## Author: dein0s, mr_rosh
+## Notes: External module for |cff33ffccpf|cffffffffUI
+## Version: 1.3
+## Dependencies: pfUI-tbc
+
+# main
+pfUI-CustomMedia-bars.lua
