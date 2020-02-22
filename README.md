@@ -1,6 +1,6 @@
 # pfUI-CustomMedia
 
-A status bar texture package for [pfUI](https://gitlab.com/shagu/pfUI), providing additional textures for the unit frames.
+A status bar texture package for [pfUI](https://github.com/shagu/pfUI), providing additional textures for the unit frames.
 
 ## Preview
 
