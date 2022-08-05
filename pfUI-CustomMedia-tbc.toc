@@ -1,5 +1,5 @@
 ## Interface: 20400
-## Title: |cff33ffccpf|cffffffffUI|cffaaaaaa |cff33ffccC|cffffffffustom|cffaaaaaa |cff33ffccM|cffffffffedia|cffaaaaaa
+## Title: |cff33ffccpf|cffffffffUI|cffaaaaaa [Custom Media]
 ## Author: dein0s, mr_rosh, shagu
 ## Notes: External module for |cff33ffccpf|cffffffffUI
 ## Version: 1.3
