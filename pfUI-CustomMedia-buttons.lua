@@ -95,6 +95,63 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
         end
     end
 
+    local function ApplyBackgroundToBank(texture, color)
+        local r, g, b, a = GetStringColor(color)
+        
+        -- Main bank slots (bag -1, 24 slots in vanilla/TBC)
+        for slotIndex = 1, 24 do
+            local button = _G["pfBag-1item" .. slotIndex]
+            if button then
+                if button.bg then
+                    button.bg:Hide()
+                    button.bg = nil
+                end
+
+                if texture then
+                    local bg = button:CreateTexture(nil, "BACKGROUND")
+                    bg:SetDrawLayer("BACKGROUND", -8)
+                    bg:SetAllPoints(button)
+                    bg:SetTexture(texture)
+                    bg:SetTexCoord(0, 1, 0, 1)
+                    bg:SetVertexColor(r, g, b, a)
+                    button.bg = bg
+                end
+
+                local icon = button.icon or button:GetNormalTexture()
+                if icon then icon:SetDrawLayer("ARTWORK", 1) end
+            end
+        end
+
+        -- Bank bags (bags 5-10)
+        for bagIndex = 5, 10 do
+            local bankBag = _G["pfBag" .. bagIndex]
+            if bankBag then
+                for slotIndex = 1, 36 do
+                    local button = _G["pfBag" .. bagIndex .. "item" .. slotIndex]
+                    if button then
+                        if button.bg then
+                            button.bg:Hide()
+                            button.bg = nil
+                        end
+
+                        if texture then
+                            local bg = button:CreateTexture(nil, "BACKGROUND")
+                            bg:SetDrawLayer("BACKGROUND", -8)
+                            bg:SetAllPoints(button)
+                            bg:SetTexture(texture)
+                            bg:SetTexCoord(0, 1, 0, 1)
+                            bg:SetVertexColor(r, g, b, a)
+                            button.bg = bg
+                        end
+
+                        local icon = button.icon or button:GetNormalTexture()
+                        if icon then icon:SetDrawLayer("ARTWORK", 1) end
+                    end
+                end
+            end
+        end
+    end
+
     local function UpdateTextures()
         local texture = GetTexture(C.CustomMedia.selectimg)
         local color = C.CustomMedia.color
@@ -107,6 +164,14 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
     frame:SetScript("OnEvent", function()
         UpdateTextures()
         frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+    end)
+
+    local bankFrame = CreateFrame("Frame")
+    bankFrame:RegisterEvent("BANKFRAME_OPENED")
+    bankFrame:SetScript("OnEvent", function()
+        local texture = GetTexture(C.CustomMedia.selectimg)
+        local color = C.CustomMedia.color
+        ApplyBackgroundToBank(texture, color)
     end)
 
     if pfUI.gui.CreateGUIEntry then
