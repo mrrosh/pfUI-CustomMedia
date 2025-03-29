@@ -1,9 +1,8 @@
 pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
     if not C.CustomMedia then C.CustomMedia = {} end
-    C.CustomMedia.selectimg = C.CustomMedia.selectimg or "Default" -- Default background texture
-    C.CustomMedia.color = C.CustomMedia.color or "1,1,1,0.5" -- Default color
+    C.CustomMedia.selectimg = C.CustomMedia.selectimg or "Default"
+    C.CustomMedia.color = C.CustomMedia.color or "1,1,1,0.5"
 
-    -- Dropdown options for selecting textures
     pfUI.gui.dropdowns.CustomMedia_selectimg = {
         "Default:" .. T["Default"],
         "Sword:" .. T["Sword"],
@@ -11,23 +10,15 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
         "Eagle:" .. T["Eagle"]
     }
 
-    -- Function to get the texture based on selection
     local function GetTexture(selection)
-        if selection == "Default" then
-            return nil
-        elseif selection == "Sword" then
-            return "Interface\\AddOns\\pfUI-CustomMedia\\media\\sword"
-        elseif selection == "Lion" then
-            return "Interface\\AddOns\\pfUI-CustomMedia\\media\\lion"
-        elseif selection == "Eagle" then
-            return "Interface\\AddOns\\pfUI-CustomMedia\\media\\eagle"
+        if selection == "Default" then return nil
+        elseif selection == "Sword" then return "Interface\\AddOns\\pfUI-CustomMedia\\media\\sword"
+        elseif selection == "Lion" then return "Interface\\AddOns\\pfUI-CustomMedia\\media\\lion"
+        elseif selection == "Eagle" then return "Interface\\AddOns\\pfUI-CustomMedia\\media\\eagle"
         end
     end
 
-    -- Function to apply background texture and color to buttons
-    local function ApplyBackgroundToPfUIButtons(texture, color)
-        local _G = getfenv(0)
-
+    local function ApplyBackgroundToButtons(texture, color)
         local buttonGroups = {
             "pfActionBarMainButton",
             "pfActionBarRightButton",
@@ -44,15 +35,11 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
         }
 
         for _, group in ipairs(buttonGroups) do
-            local buttonCount = 12
-            if group == "pfActionBarPetButton" or group == "pfActionBarStancesButton" then
-                buttonCount = 10
-            end
-
+            local buttonCount = (group == "pfActionBarPetButton" or group == "pfActionBarStancesButton") and 10 or 12
+            local r, g, b, a = GetStringColor(color)
+            
             for i = 1, buttonCount do
-                local buttonName = group .. i
-                local button = _G[buttonName]
-                local r, g, b, a = GetStringColor(color)
+                local button = _G[group .. i]
                 if button then
                     if button.bg then 
                         button.bg:Hide()
@@ -70,21 +57,17 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
                     end
 
                     local icon = button.icon or button:GetNormalTexture()
-                    if icon then
-                        icon:SetDrawLayer("ARTWORK", 1)
-                    end
+                    if icon then icon:SetDrawLayer("ARTWORK", 1) end
                 end
             end
         end
     end
 
-    -- Function to apply background to bags
     local function ApplyBackgroundToBags(texture, color)
-        local _G = getfenv(0)
-
+        local r, g, b, a = GetStringColor(color)
+        
         for bagIndex = 0, 4 do
             local bag = _G["pfBag" .. bagIndex]
-            local r, g, b, a = GetStringColor(color)
             if bag then
                 for slotIndex = 1, 36 do
                     local button = _G["pfBag" .. bagIndex .. "item" .. slotIndex]
@@ -105,32 +88,27 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
                         end
 
                         local icon = button.icon or button:GetNormalTexture()
-                        if icon then
-                            icon:SetDrawLayer("ARTWORK", 1)
-                        end
+                        if icon then icon:SetDrawLayer("ARTWORK", 1) end
                     end
                 end
             end
         end
     end
 
-    -- Reload function to update UI with new settings
-    local function ReloadUI()
+    local function UpdateTextures()
         local texture = GetTexture(C.CustomMedia.selectimg)
         local color = C.CustomMedia.color
-        ApplyBackgroundToPfUIButtons(texture, color)
+        ApplyBackgroundToButtons(texture, color)
         ApplyBackgroundToBags(texture, color)
     end
 
-    -- Register event to apply background when entering the world (after reload)
     local frame = CreateFrame("Frame")
     frame:RegisterEvent("PLAYER_ENTERING_WORLD")
     frame:SetScript("OnEvent", function()
-        ReloadUI()
+        UpdateTextures()
         frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
     end)
 
-    -- GUI configuration
     if pfUI.gui.CreateGUIEntry then
         pfUI.gui.CreateGUIEntry(T["Thirdparty"], T["CustomMedia"], function()
             pfUI.gui.CreateConfig(pfUI.gui.UpdaterFunctions["CustomMedia"], T["Bar buttons background"], nil, nil, "header")
@@ -138,7 +116,6 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
             pfUI.gui.CreateConfig(pfUI.gui.UpdaterFunctions["CustomMedia"], T["Pick Color"], C.CustomMedia, "color", "color")
         end)
     else
-        -- Fallback GUI setup
         pfUI.gui.tabs.thirdparty.tabs.CustomMedia = pfUI.gui.tabs.thirdparty.tabs:CreateTabChild("CustomMedia", true)
         pfUI.gui.tabs.thirdparty.tabs.CustomMedia:SetScript("OnShow", function() if not this.setup then this.setup = true end end)
     end
