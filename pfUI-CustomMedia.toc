@@ -7,3 +7,4 @@
 
 # main
 pfUI-CustomMedia-bars.lua
+pfUI-CustomMedia-buttons.lua
