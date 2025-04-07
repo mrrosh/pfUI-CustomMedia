@@ -11,14 +11,48 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
     }
 
     local function GetTexture(selection)
-        if selection == "Default" then return nil
-        elseif selection == "Sword" then return "Interface\\AddOns\\pfUI-CustomMedia\\media\\sword"
-        elseif selection == "Lion" then return "Interface\\AddOns\\pfUI-CustomMedia\\media\\lion"
-        elseif selection == "Eagle" then return "Interface\\AddOns\\pfUI-CustomMedia\\media\\eagle"
+        local textures = {
+            Default = nil,
+            Sword = "Interface\\AddOns\\pfUI-CustomMedia\\media\\sword",
+            Lion = "Interface\\AddOns\\pfUI-CustomMedia\\media\\lion",
+            Eagle = "Interface\\AddOns\\pfUI-CustomMedia\\media\\eagle"
+        }
+        return textures[selection] or nil
+    end
+
+    local function ApplyBackground(texture, color, frame)
+        if not frame or not frame:IsShown() then return end
+        local r, g, b, a = GetStringColor(color)
+        
+        -- Clear existing background
+        if frame.bg then
+            frame.bg:Hide()
+            frame.bg:SetTexture(nil)
+            frame.bg = nil
+        end
+
+        if texture then
+            if not frame.bg then
+                frame.bg = frame:CreateTexture(nil, "BACKGROUND")
+                frame.bg:SetDrawLayer("BACKGROUND", -8)
+                frame.bg:SetAllPoints(frame)
+            end
+            frame.bg:SetTexture(texture)
+            frame.bg:SetTexCoord(0, 1, 0, 1)
+            frame.bg:SetVertexColor(r, g, b, a)
+            frame.bg:Show()
+        end
+
+        local icon = frame.icon or frame:GetNormalTexture()
+        if icon then 
+            icon:SetDrawLayer("ARTWORK", 1)
+            icon:Show()
         end
     end
 
-    local function ApplyBackgroundToButtons(texture, color)
+    local function UpdateButtons()
+        local texture = GetTexture(C.CustomMedia.selectimg)
+        local color = C.CustomMedia.color
         local buttonGroups = {
             "pfActionBarMainButton",
             "pfActionBarRightButton",
@@ -36,35 +70,18 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
 
         for _, group in ipairs(buttonGroups) do
             local buttonCount = (group == "pfActionBarPetButton" or group == "pfActionBarStancesButton") and 10 or 12
-            local r, g, b, a = GetStringColor(color)
-            
             for i = 1, buttonCount do
                 local button = _G[group .. i]
                 if button then
-                    if button.bg then 
-                        button.bg:Hide()
-                        button.bg = nil
-                    end
-
-                    if texture then
-                        local bg = button:CreateTexture(nil, "BACKGROUND")
-                        bg:SetDrawLayer("BACKGROUND", -8)
-                        bg:SetAllPoints(button)
-                        bg:SetTexture(texture)
-                        bg:SetTexCoord(0, 1, 0, 1)
-                        bg:SetVertexColor(r, g, b, a)
-                        button.bg = bg
-                    end
-
-                    local icon = button.icon or button:GetNormalTexture()
-                    if icon then icon:SetDrawLayer("ARTWORK", 1) end
+                    ApplyBackground(texture, color, button)
                 end
             end
         end
     end
 
-    local function ApplyBackgroundToBags(texture, color)
-        local r, g, b, a = GetStringColor(color)
+    local function UpdateBags()
+        local texture = GetTexture(C.CustomMedia.selectimg)
+        local color = C.CustomMedia.color
         
         for bagIndex = 0, 4 do
             local bag = _G["pfBag" .. bagIndex]
@@ -72,108 +89,96 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
                 for slotIndex = 1, 36 do
                     local button = _G["pfBag" .. bagIndex .. "item" .. slotIndex]
                     if button then
-                        if button.bg then 
-                            button.bg:Hide()
-                            button.bg = nil
-                        end
-
-                        if texture then
-                            local bg = button:CreateTexture(nil, "BACKGROUND")
-                            bg:SetDrawLayer("BACKGROUND", -8)
-                            bg:SetAllPoints(button)
-                            bg:SetTexture(texture)
-                            bg:SetTexCoord(0, 1, 0, 1)
-                            bg:SetVertexColor(r, g, b, a)
-                            button.bg = bg
-                        end
-
-                        local icon = button.icon or button:GetNormalTexture()
-                        if icon then icon:SetDrawLayer("ARTWORK", 1) end
+                        ApplyBackground(texture, color, button)
                     end
                 end
             end
         end
     end
 
-    local function ApplyBackgroundToBank(texture, color)
-        local r, g, b, a = GetStringColor(color)
+    local function UpdateBank()
+        local texture = GetTexture(C.CustomMedia.selectimg)
+        local color = C.CustomMedia.color
         
-        -- Main bank slots (bag -1, 24 slots in vanilla/TBC)
         for slotIndex = 1, 24 do
             local button = _G["pfBag-1item" .. slotIndex]
             if button then
-                if button.bg then
-                    button.bg:Hide()
-                    button.bg = nil
-                end
-
-                if texture then
-                    local bg = button:CreateTexture(nil, "BACKGROUND")
-                    bg:SetDrawLayer("BACKGROUND", -8)
-                    bg:SetAllPoints(button)
-                    bg:SetTexture(texture)
-                    bg:SetTexCoord(0, 1, 0, 1)
-                    bg:SetVertexColor(r, g, b, a)
-                    button.bg = bg
-                end
-
-                local icon = button.icon or button:GetNormalTexture()
-                if icon then icon:SetDrawLayer("ARTWORK", 1) end
+                ApplyBackground(texture, color, button)
             end
         end
 
-        -- Bank bags (bags 5-10)
         for bagIndex = 5, 10 do
             local bankBag = _G["pfBag" .. bagIndex]
             if bankBag then
                 for slotIndex = 1, 36 do
                     local button = _G["pfBag" .. bagIndex .. "item" .. slotIndex]
                     if button then
-                        if button.bg then
-                            button.bg:Hide()
-                            button.bg = nil
-                        end
-
-                        if texture then
-                            local bg = button:CreateTexture(nil, "BACKGROUND")
-                            bg:SetDrawLayer("BACKGROUND", -8)
-                            bg:SetAllPoints(button)
-                            bg:SetTexture(texture)
-                            bg:SetTexCoord(0, 1, 0, 1)
-                            bg:SetVertexColor(r, g, b, a)
-                            button.bg = bg
-                        end
-
-                        local icon = button.icon or button:GetNormalTexture()
-                        if icon then icon:SetDrawLayer("ARTWORK", 1) end
+                        ApplyBackground(texture, color, button)
                     end
                 end
             end
         end
     end
 
-    local function UpdateTextures()
-        local texture = GetTexture(C.CustomMedia.selectimg)
-        local color = C.CustomMedia.color
-        ApplyBackgroundToButtons(texture, color)
-        ApplyBackgroundToBags(texture, color)
+    local function UpdateAll()
+        UpdateButtons()
+        UpdateBags()
+        if BankFrame and BankFrame:IsShown() then
+            UpdateBank()
+        end
     end
 
-    local frame = CreateFrame("Frame")
-    frame:RegisterEvent("PLAYER_ENTERING_WORLD")
-    frame:SetScript("OnEvent", function()
-        UpdateTextures()
-        frame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+    -- Main update frame
+    local f = CreateFrame("Frame")
+    f:RegisterEvent("PLAYER_ENTERING_WORLD")
+    f:RegisterEvent("BAG_UPDATE")
+    f:RegisterEvent("BANKFRAME_OPENED")
+    f:RegisterEvent("BANKFRAME_CLOSED")
+    f:RegisterEvent("ADDON_LOADED")
+    
+    -- Delay mechanism for Vanilla
+    local delayFrame = CreateFrame("Frame")
+    local delayTime = 1 -- 1 second delay
+    local elapsed = 0
+    delayFrame:Hide()
+    
+    delayFrame:SetScript("OnUpdate", function()
+        elapsed = elapsed + arg1
+        if elapsed >= delayTime then
+            UpdateAll()
+            this:Hide()
+            elapsed = 0
+        end
     end)
 
-    local bankFrame = CreateFrame("Frame")
-    bankFrame:RegisterEvent("BANKFRAME_OPENED")
-    bankFrame:SetScript("OnEvent", function()
-        local texture = GetTexture(C.CustomMedia.selectimg)
-        local color = C.CustomMedia.color
-        ApplyBackgroundToBank(texture, color)
+    local function DelayedUpdate()
+        delayFrame:Show()
+    end
+
+    f:SetScript("OnEvent", function()
+        if event == "PLAYER_ENTERING_WORLD" or (event == "ADDON_LOADED" and arg1 == "pfUI") then
+            DelayedUpdate()
+            if event == "PLAYER_ENTERING_WORLD" then
+                this:UnregisterEvent("PLAYER_ENTERING_WORLD")
+            end
+        elseif event == "BAG_UPDATE" then
+            UpdateBags()
+        elseif event == "BANKFRAME_OPENED" then
+            UpdateBank()
+        elseif event == "BANKFRAME_CLOSED" then
+            UpdateBags()
+        end
     end)
 
+    -- Hook into pfUI's update system
+    if pfUI.gui and pfUI.gui.UpdaterFunctions then
+        pfUI.gui.UpdaterFunctions["CustomMedia"] = function()
+            UpdateAll()
+            DelayedUpdate()
+        end
+    end
+
+    -- GUI Configuration
     if pfUI.gui.CreateGUIEntry then
         pfUI.gui.CreateGUIEntry(T["Thirdparty"], T["CustomMedia"], function()
             pfUI.gui.CreateConfig(pfUI.gui.UpdaterFunctions["CustomMedia"], T["Bar buttons background"], nil, nil, "header")
@@ -182,6 +187,14 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
         end)
     else
         pfUI.gui.tabs.thirdparty.tabs.CustomMedia = pfUI.gui.tabs.thirdparty.tabs:CreateTabChild("CustomMedia", true)
-        pfUI.gui.tabs.thirdparty.tabs.CustomMedia:SetScript("OnShow", function() if not this.setup then this.setup = true end end)
+        pfUI.gui.tabs.thirdparty.tabs.CustomMedia:SetScript("OnShow", function() 
+            if not this.setup then 
+                this.setup = true 
+                DelayedUpdate()
+            end 
+        end)
     end
+
+    -- Force initial update
+    DelayedUpdate()
 end)
