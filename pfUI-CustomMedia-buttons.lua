@@ -32,14 +32,14 @@ pfUI:RegisterModule("CustomMedia", "vanilla:tbc", function()
     }
     return textures[selection] or nil
   end
-
-  local function GetStringColor(str)
-    local r, g, b, a = strmatch(str or "", "([^,]+),([^,]+),([^,]+),([^,]+)")
-    r, g, b, a = tonumber(r), tonumber(g), tonumber(b), tonumber(a)
-    if not r or not g or not b or not a then
-      return 1, 1, 1, 0.5
+  local function GetStringColor(color)
+    if type(color) == "string" then
+      local r, g, b, a = strsplit(",", color)
+      return tonumber(r), tonumber(g), tonumber(b), tonumber(a) or 1
+    elseif type(color) == "table" then
+      return color.r or 1, color.g or 1, color.b or 1, color.a or 1
     end
-    return r, g, b, a
+    return 1, 1, 1, 1 -- default to white if no valid color is provided
   end
 
   local function ApplyBackground(texture, color, frame)
